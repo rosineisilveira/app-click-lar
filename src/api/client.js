@@ -1,7 +1,7 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const baseURL = 'http://192.168.2.189:3000/api'; 
+const baseURL = "https://click-lar-api-wcvm.vercel.app/api"
 const client = axios.create({
   baseURL,
 });

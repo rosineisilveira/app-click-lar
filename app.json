@@ -8,9 +8,8 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      
       "resizeMode": "contain",
-      "image": "./assets/splash.png",
+      "image": "./assets/logo.png",
       "backgroundColor": "#ffffff"
     },
     "ios": {
@@ -21,10 +20,19 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.rosinei2.appclicklar"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5ffcdf64-e23e-46e6-b2dc-a62a03a65c63"
+      }
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }

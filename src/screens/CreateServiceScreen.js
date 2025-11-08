@@ -215,7 +215,8 @@ const styles = StyleSheet.create({
   picker: {
     height: 55, 
     width: '100%',
-    color: COLORS.text, 
+    color: COLORS.text,
+    backgroundColor: COLORS.white, 
   },
   spinner: {
     marginTop: SIZES.padding * 1.5,

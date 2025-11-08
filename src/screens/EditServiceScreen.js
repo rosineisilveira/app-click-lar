@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  View, Text, TextInput, StyleSheet, Alert,
+  View, Text, TextInput, Button, StyleSheet, Alert,
   ScrollView, ActivityIndicator, TouchableOpacity
 } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -12,12 +12,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 const EditServiceScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  const { serviceId } = route.params;
+  const serviceId = route.params?.serviceId;
+
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
   const [categories, setCategories] = useState([]);
+
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -27,114 +29,136 @@ const EditServiceScreen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!serviceId) { setError("ID não fornecido."); setIsLoading(false); return; }
+      if (!serviceId) {
+        setError("ID do serviço não fornecido.");
+        setIsLoading(false);
+        return;
+      }
+
       try {
 
         setIsLoading(true);
-
-        const [serviceRes, catRes] = await Promise.all([
-          client.get(`/services/public/${serviceId}`),
-          client.get('/categories')
+  
+        const [catRes, serviceRes] = await Promise.all([
+          client.get('/categories'),
+          client.get(`/services/public/${serviceId}`)
         ]);
 
-        // LOG PARA DEPURAÇÃO: Verifique se os valores são IDÊNTICOS no terminal
-        console.log("Categoria do Serviço (API):", `"${serviceRes.data.category}"`);
-        console.log("Categorias Disponíveis:", catRes.data);
-
         setCategories(catRes.data);
-        setTitle(serviceRes.data.title);
-        setDescription(serviceRes.data.description);
-        setPrice(serviceRes.data.price.toString());
-        setCategory(serviceRes.data.category);
+
+        const service = serviceRes.data;
+        setTitle(service.title || '');
+        setDescription(service.description || '');
+        setPrice(service.price?.toString() || '');
+        setCategory(service.category || '');
 
       } catch (err) {
-        setError("Erro ao carregar dados.");
-        console.error(err);
+        console.error("Erro ao carregar dados para edição:", err);
+        setError("Não foi possível carregar os dados do serviço.");
       } finally {
         setIsLoading(false);
       }
     };
+
     fetchData();
   }, [serviceId]);
 
   const handleSaveChanges = async () => {
-     
-     if (!title || !description || !price || !category) { Alert.alert("Erro", "Preencha tudo."); return; }
-     const numericPrice = parseFloat(price);
-     if (isNaN(numericPrice) || numericPrice <= 0 || numericPrice > MAX_PRICE) { Alert.alert("Erro", "Preço inválido."); return; }
+    if (!title || !description || !price || !category) {
+      Alert.alert("Erro", "Por favor, preencha todos os campos."); return;
+    }
+    const numericPrice = parseFloat(price);
+    if (isNaN(numericPrice) || numericPrice <= 0 || numericPrice > MAX_PRICE) {
+       Alert.alert("Erro", "Preço inválido."); return;
+    }
 
     setIsSaving(true);
     try {
       await client.put(`/services/private/${serviceId}`, {
         title, description, price: numericPrice, category
       });
-      Alert.alert("Sucesso!", "Atualizado.", [{ text: "OK", onPress: () => navigation.goBack() }]);
+      Alert.alert("Sucesso!", "Anúncio atualizado.", [{ text: "OK", onPress: () => navigation.goBack() }]);
     } catch (err) {
-       Alert.alert("Erro", err.response?.data?.error || "Falha ao salvar.");
+      Alert.alert("Erro", "Não foi possível salvar as alterações.");
     } finally {
       setIsSaving(false);
     }
   };
 
   const handleDeleteService = () => {
-    
-       Alert.alert("Confirmar", "Excluir este anúncio?", [
-        { text: "Cancelar", style: "cancel" },
-        { text: "Excluir", style: "destructive", onPress: async () => {
-            try {
-                setIsDeleting(true);
-                await client.delete(`/services/private/${serviceId}`);
-                navigation.goBack();
-            } catch (e) { Alert.alert("Erro", "Não foi possível excluir."); setIsDeleting(false); }
-        }}
-      ]);
+    Alert.alert("Confirmar Exclusão", "Tem certeza?", [
+      { text: "Cancelar", style: "cancel" },
+      { text: "Excluir", style: "destructive", onPress: async () => {
+          setIsDeleting(true);
+          try {
+            await client.delete(`/services/private/${serviceId}`);
+            navigation.goBack();
+          } catch (err) {
+            Alert.alert("Erro", "Não foi possível excluir.");
+            setIsDeleting(false);
+          }
+      }}
+    ]);
   };
 
   if (isLoading) return <ActivityIndicator size="large" color={COLORS.primary} style={styles.center} />;
-  if (error) return <View style={styles.center}><Text style={{color:'red'}}>{error}</Text></View>;
+  if (error) return <View style={styles.center}><Text style={{ color: 'red' }}>{error}</Text></View>;
 
   return (
     <SafeAreaView style={styles.screenContainer}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Text style={styles.title}>Editar Anúncio</Text>
 
-        <View style={styles.inputGroup}><Text style={styles.label}>Título</Text><TextInput style={styles.input} value={title} onChangeText={setTitle} placeholderTextColor={COLORS.gray}/></View>
-        <View style={styles.inputGroup}><Text style={styles.label}>Descrição</Text><TextInput style={[styles.input, styles.textArea]} value={description} onChangeText={setDescription} multiline textAlignVertical="top" placeholderTextColor={COLORS.gray}/></View>
-        <View style={styles.inputGroup}><Text style={styles.label}>Preço (R$)</Text><TextInput style={styles.input} value={price} onChangeText={setPrice} keyboardType="numeric" placeholderTextColor={COLORS.gray}/></View>
-
         <View style={styles.inputGroup}>
-          <Text style={styles.label}>Categoria</Text>
-          <View style={styles.pickerContainer}>
-            <Picker
-              selectedValue={category}
-              onValueChange={(itemValue) => {
-                  console.log("EditService - Nova categoria selecionada:", itemValue);
-                  setCategory(itemValue);
-              }}
-              style={styles.picker}
-              dropdownIconColor={COLORS.primary}
-              mode="dropdown"
-            >
-               {categories.map((cat, index) => (
-                  <Picker.Item 
-                    key={index} 
-                    label={cat} 
-                    value={cat} 
-                    color={COLORS.text} 
-                    style={{ backgroundColor: COLORS.white }} 
-                  />
-                ))}
-            </Picker>
-          </View>
+            <Text style={styles.label}>Título</Text>
+            <TextInput style={styles.input} value={title} onChangeText={setTitle} placeholderTextColor={COLORS.gray} />
         </View>
 
-        {isSaving ? <ActivityIndicator color={COLORS.primary} style={styles.spinner} /> : <Button title="Salvar Alterações" onPress={handleSaveChanges} color={COLORS.primary} />}
+        <View style={styles.inputGroup}>
+            <Text style={styles.label}>Descrição</Text>
+            <TextInput style={[styles.input, styles.textArea]} value={description} onChangeText={setDescription} multiline textAlignVertical="top" placeholderTextColor={COLORS.gray} />
+        </View>
+
+        <View style={styles.inputGroup}>
+            <Text style={styles.label}>Preço (R$)</Text>
+            <TextInput style={styles.input} value={price} onChangeText={setPrice} keyboardType="numeric" placeholderTextColor={COLORS.gray} />
+        </View>
+
+        <View style={styles.inputGroup}>
+            <Text style={styles.label}>Categoria</Text>
+            <View style={styles.pickerContainer}>
+              <Picker
+                selectedValue={category}
+                onValueChange={(itemValue) => setCategory(itemValue)}
+                style={styles.picker}
+                dropdownIconColor={COLORS.primary}
+                mode="dropdown"
+              >
         
+                {categories.map((cat, index) => (
+                  <Picker.Item
+                    key={index}
+                    label={cat}
+                    value={cat}
+                    color={COLORS.text}
+                    style={{ backgroundColor: COLORS.white }}
+                  />
+                ))}
+              </Picker>
+            </View>
+        </View>
+
+        {isSaving ? (
+          <ActivityIndicator size="large" color={COLORS.primary} style={styles.spinner} />
+        ) : (
+          <Button title="Salvar Alterações" onPress={handleSaveChanges} color={COLORS.primary} />
+        )}
+
         {!isSaving && (
-             isDeleting ? <ActivityIndicator color="red" style={styles.spinner} /> :
-             <TouchableOpacity style={styles.deleteButton} onPress={handleDeleteService}>
-                 <Text style={styles.deleteButtonText}>Excluir Anúncio</Text>
-             </TouchableOpacity>
+           isDeleting ? <ActivityIndicator size="large" color="red" style={styles.spinner} /> :
+           <TouchableOpacity style={styles.deleteButton} onPress={handleDeleteService}>
+               <Text style={styles.deleteButtonText}>Excluir Anúncio</Text>
+           </TouchableOpacity>
         )}
 
       </ScrollView>

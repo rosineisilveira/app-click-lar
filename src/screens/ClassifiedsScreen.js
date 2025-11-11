@@ -179,71 +179,137 @@ const ClassifiedsScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  screenContainer: { flex: 1, backgroundColor: COLORS.lightGray },
+  screenContainer: { 
+    flex: 1, 
+    backgroundColor: COLORS.lightGray 
+  },
   header: {
-    flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',
-    paddingHorizontal: SIZES.padding, paddingVertical: SIZES.base,
-    backgroundColor: COLORS.white, borderBottomWidth: 1, borderBottomColor: '#eee',
+    flexDirection: 'row', 
+    justifyContent: 'space-between', 
+    alignItems: 'center',
+    paddingHorizontal: SIZES.padding, 
+    paddingVertical: SIZES.base,
+    backgroundColor: COLORS.white, 
+    borderBottomWidth: 1, 
+    borderBottomColor: '#eee',
     height: 60,
   },
-  headerLogo: { height: '80%', width: 100, aspectRatio: 3/1 },
-
-  headerActions: { flexDirection: 'row', alignItems: 'center' },
-
-  loginButton: { paddingHorizontal: SIZES.padding * 0.75, paddingVertical: SIZES.base * 0.75, marginRight: SIZES.base },
-
-  loginButtonText: { ...FONTS.body, color: COLORS.primary, fontWeight: '600', fontSize: 14 },
-
-  registerButton: { backgroundColor: COLORS.accent, paddingHorizontal: SIZES.padding * 1.2, paddingVertical: SIZES.base * 0.75, borderRadius: SIZES.radius * 2 },
-  
-  registerButtonText: { ...FONTS.body, color: COLORS.white, fontWeight: 'bold', fontSize: 14 },
-  
-  createButton: {
-    backgroundColor: COLORS.accent, paddingHorizontal: SIZES.padding * 1.2, paddingVertical: SIZES.base * 0.75,
-    borderRadius: SIZES.radius * 2, marginRight: SIZES.padding,
+  headerLogo: { 
+    height: '80%', 
+    width: 100, 
+    aspectRatio: 3/1 
   },
-
-  createButtonText: { ...FONTS.body, color: COLORS.white, fontWeight: 'bold', fontSize: 14 },
+  headerActions: { 
+    flexDirection: 'row', 
+    alignItems: 'center' 
+  },
+  loginButton: { 
+    paddingHorizontal: SIZES.padding * 0.75, 
+    paddingVertical: SIZES.base * 0.75, 
+    marginRight: SIZES.base 
+  },
+  loginButtonText: { 
+    ...FONTS.body, 
+    color: COLORS.primary, 
+    fontWeight: '600', 
+    fontSize: 14 
+  },
+  registerButton: { 
+    backgroundColor: COLORS.accent, 
+    paddingHorizontal: SIZES.padding * 1.2, 
+    paddingVertical: SIZES.base * 0.75, 
+    borderRadius: SIZES.radius * 2 
+  },
+  registerButtonText: { 
+    ...FONTS.body, 
+    color: COLORS.white, 
+    fontWeight: 'bold', 
+    fontSize: 14 
+  },
+  createButton: {
+    backgroundColor: COLORS.accent, 
+    paddingHorizontal: SIZES.padding * 1.2, 
+    paddingVertical: SIZES.base * 0.75,
+    borderRadius: SIZES.radius * 2, 
+    marginRight: SIZES.padding,
+  },
+  createButtonText: { 
+    ...FONTS.body, 
+    color: COLORS.white, 
+    fontWeight: 'bold', 
+    fontSize: 14 
+  },
   profileButton: {
-    backgroundColor: COLORS.primary, paddingHorizontal: SIZES.padding * 1.2, paddingVertical: SIZES.base * 0.75,
+    backgroundColor: COLORS.primary, 
+    paddingHorizontal: SIZES.padding * 1.2, 
+    paddingVertical: SIZES.base * 0.75,
     borderRadius: SIZES.radius * 2,
   },
-
-  profileButtonText: { ...FONTS.body, color: COLORS.white, fontWeight: 'bold', fontSize: 14 },
-
+  profileButtonText: { 
+    ...FONTS.body, 
+    color: COLORS.white, 
+    fontWeight: 'bold', 
+    fontSize: 14 
+  },
   searchContainer: {
-    flexDirection: 'row', alignItems: 'center', backgroundColor: COLORS.white,
-    paddingHorizontal: SIZES.padding, marginHorizontal: SIZES.padding,
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    backgroundColor: COLORS.white,
+    paddingHorizontal: SIZES.padding, 
+    marginHorizontal: SIZES.padding,
     marginVertical: SIZES.padding * 0.75, 
-    borderRadius: SIZES.radius, borderWidth: 1, borderColor: '#eee', height: 45,
+    borderRadius: SIZES.radius, 
+    borderWidth: 1, 
+    borderColor: '#eee', 
+    height: 45,
   },
-
-  searchIcon: { marginRight: SIZES.base },
+  searchIcon: { 
+    marginRight: SIZES.base 
+  },
   searchInput: {
-    flex: 1, ...FONTS.body, fontSize: 14, color: COLORS.text, height: '100%' 
+    flex: 1, 
+    ...FONTS.body, 
+    fontSize: 14, 
+    color: COLORS.text, height: '100%' 
   },
-
   clearSearchIcon:{
       paddingLeft: SIZES.base, 
   },
-  
   categoryContainer: {
-    paddingVertical: 12, backgroundColor: COLORS.white, borderBottomWidth: 1,
-    borderBottomColor: '#eee', marginBottom: 10, 
+    paddingVertical: 12, 
+    backgroundColor: COLORS.white, 
+    borderBottomWidth: 1,
+    borderBottomColor: '#eee', 
+    marginBottom: 10, 
   },
-  
-  categoryScrollView: { paddingHorizontal: SIZES.padding },
+  categoryScrollView: { 
+    paddingHorizontal: SIZES.padding 
+  },
   categoryButton: {
-    backgroundColor: COLORS.lightGray, paddingHorizontal: 20, paddingVertical: 10,
-    borderRadius: 20, marginRight: 10,
+    backgroundColor: COLORS.lightGray, 
+    paddingHorizontal: 20, 
+    paddingVertical: 10,
+    borderRadius: 20, 
+    marginRight: 10,
   },
-
-  selectedCategoryButton: { backgroundColor: COLORS.primary },
-  categoryButtonText: { color: COLORS.text, fontSize: 14, fontWeight: '500'},
-  selectedCategoryButtonText: { color: COLORS.white, fontWeight: 'bold'},
-  
+  selectedCategoryButton: { 
+    backgroundColor: COLORS.primary 
+  },
+  categoryButtonText: { 
+    color: COLORS.text, 
+    fontSize: 14, 
+    fontWeight: '500'
+  },
+  selectedCategoryButtonText: { 
+    color: COLORS.white, 
+    fontWeight: 'bold'
+  },
   emptyText: {
-    textAlign: 'center', marginTop: 50, fontSize: 16, color: COLORS.gray, paddingHorizontal: 20,
+    textAlign: 'center', 
+    marginTop: 50, 
+    fontSize: 16, 
+    color: COLORS.gray, 
+    paddingHorizontal: 20,
   },
   
 });

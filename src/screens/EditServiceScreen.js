@@ -167,19 +167,77 @@ const EditServiceScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  screenContainer: { flex: 1, backgroundColor: COLORS.lightGray },
-  scrollContent: { padding: SIZES.padding * 1.5, paddingBottom: 30 },
-  center: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  title: { ...FONTS.h2, textAlign: 'center', marginBottom: SIZES.padding * 1.5, color: COLORS.text },
-  inputGroup: { marginBottom: SIZES.padding * 1.2 },
-  label: { ...FONTS.body, fontSize: 14, color: COLORS.gray, marginBottom: SIZES.base / 2, marginLeft: 5 },
-  input: { backgroundColor: COLORS.white, minHeight: 50, borderColor: '#ddd', borderWidth: 1, borderRadius: SIZES.radius, paddingHorizontal: SIZES.padding, fontSize: 16, color: COLORS.text },
-  textArea: { height: 120, paddingTop: 15 },
-  pickerContainer: { backgroundColor: COLORS.white, borderColor: '#ddd', borderWidth: 1, borderRadius: SIZES.radius, justifyContent: 'center', overflow: 'hidden' },
-  picker: { height: 55, width: '100%', color: COLORS.text, backgroundColor: COLORS.white },
-  spinner: { marginVertical: 20 },
-  deleteButton: { marginTop: 30, paddingVertical: 12, borderRadius: SIZES.radius, borderWidth: 1, borderColor: 'red', alignItems: 'center' },
-  deleteButtonText: { color: 'red', fontSize: 16, fontWeight: 'bold' }
+  screenContainer: { 
+    flex: 1, 
+    backgroundColor: COLORS.lightGray 
+  },
+  scrollContent: { 
+    padding: SIZES.padding * 1.5, 
+    paddingBottom: 30 
+  },
+  center: { 
+    flex: 1, 
+    justifyContent: 'center', 
+    alignItems: 'center' 
+  },
+  title: { 
+    ...FONTS.h2, 
+    textAlign: 'center', 
+    marginBottom: SIZES.padding * 1.5, 
+    color: COLORS.text 
+  },
+  inputGroup: { 
+    marginBottom: SIZES.padding * 1.2 
+  },
+  label: { 
+    ...FONTS.body, 
+    fontSize: 14, color: COLORS.gray, 
+    marginBottom: SIZES.base / 2, 
+    marginLeft: 5 
+  },
+  input: { 
+    backgroundColor: COLORS.white, 
+    minHeight: 50, 
+    borderColor: '#ddd', 
+    borderWidth: 1, 
+    borderRadius: SIZES.radius, 
+    paddingHorizontal: SIZES.padding, 
+    fontSize: 16, color: COLORS.text 
+  },
+  textArea: { 
+    height: 120, 
+    paddingTop: 15 
+  },
+  pickerContainer: { 
+    backgroundColor: COLORS.white, 
+    borderColor: '#ddd', 
+    borderWidth: 1, 
+    borderRadius: SIZES.radius, 
+    justifyContent: 'center', 
+    overflow: 'hidden' 
+  },
+  picker: { 
+    height: 55, 
+    width: '100%', 
+    color: COLORS.text, 
+    backgroundColor: COLORS.white 
+  },
+  spinner: { 
+    marginVertical: 20 
+  },
+  deleteButton: { 
+    marginTop: 30, 
+    paddingVertical: 12, 
+    borderRadius: SIZES.radius, 
+    borderWidth: 1, 
+    borderColor: 'red', 
+    alignItems: 'center' 
+  },
+  deleteButtonText: { 
+    color: 'red', 
+    fontSize: 16, 
+    fontWeight: 'bold' 
+  }
 });
 
 export default EditServiceScreen;

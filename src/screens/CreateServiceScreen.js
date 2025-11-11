@@ -118,23 +118,73 @@ const CreateServiceScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  screenContainer: { flex: 1, backgroundColor: COLORS.lightGray },
-  scrollContent: { padding: SIZES.padding * 1.5, paddingBottom: 50 },
-  title: { ...FONTS.h2, textAlign: 'center', marginBottom: SIZES.padding * 1.5, color: COLORS.text },
-  inputGroup: { marginBottom: SIZES.padding * 1.2 },
-  label: { ...FONTS.body, fontSize: 14, color: COLORS.gray, marginBottom: SIZES.base / 2, marginLeft: 5 },
-  input: { backgroundColor: COLORS.white, minHeight: 50, borderColor: '#ddd', borderWidth: 1, borderRadius: SIZES.radius, paddingHorizontal: SIZES.padding, fontSize: 16, color: COLORS.text },
-  textArea: { height: 120, paddingTop: 15 },
+  screenContainer: { 
+    flex: 1, 
+    backgroundColor: COLORS.lightGray 
+  },
+  scrollContent: { 
+    padding: SIZES.padding * 1.5, 
+    paddingBottom: 50 
+  },
+  title: { 
+    ...FONTS.h2, 
+    textAlign: 'center', 
+    marginBottom: SIZES.padding * 1.5, 
+    color: COLORS.text 
+  },
+  inputGroup: { 
+    marginBottom: SIZES.padding * 1.2 
+  },
+  label: { 
+    ...FONTS.body, 
+    fontSize: 14, 
+    color: COLORS.gray, 
+    marginBottom: SIZES.base / 2, 
+    marginLeft: 5 
+  },
+  input: { 
+    backgroundColor: COLORS.white, 
+    minHeight: 50, 
+    borderColor: '#ddd', 
+    borderWidth: 1, 
+    borderRadius: SIZES.radius, 
+    paddingHorizontal: SIZES.padding, 
+    fontSize: 16, 
+    color: COLORS.text 
+  },
+  textArea: { height: 120, 
+    paddingTop: 15 
+  },
   pickerContainer: {
-    backgroundColor: COLORS.white, borderColor: '#ddd', borderWidth: 1, borderRadius: SIZES.radius, justifyContent: 'center', overflow: 'hidden',
+    backgroundColor: COLORS.white, 
+    borderColor: '#ddd', 
+    borderWidth: 1, 
+    borderRadius: SIZES.radius, 
+    justifyContent: 'center', 
+    overflow: 'hidden',
   },
   picker: {
-      height: 55, width: '100%',
-      color: COLORS.text, backgroundColor: COLORS.white, 
+      height: 55, 
+      width: '100%',
+      color: COLORS.text, 
+      backgroundColor: COLORS.white, 
   },
-  spinner: { marginTop: SIZES.padding * 1.5 },
-  submitButton: { backgroundColor: COLORS.primary, paddingVertical: 15, borderRadius: SIZES.radius, alignItems: 'center', marginTop: SIZES.padding },
-  submitButtonText: { color: COLORS.white, fontSize: 16, fontWeight: 'bold' }
+  spinner: { 
+    marginTop: SIZES.padding * 1.5 
+  },
+  submitButton: { 
+    backgroundColor: COLORS.primary, 
+    paddingVertical: 15, 
+    borderRadius: SIZES.radius, 
+    alignItems: 'center', 
+    marginTop: SIZES.padding 
+  },
+  submitButtonText: { 
+    color: COLORS.white, 
+    fontSize: 16, 
+    fontWeight: 'bold' 
+  }
+  
 });
 
 export default CreateServiceScreen;
